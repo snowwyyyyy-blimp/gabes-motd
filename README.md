@@ -22,7 +22,7 @@ srcds -condebug ───────►  tf/console.log        "FakeIP allocati
 |---|---|---|
 | Mode | Mann vs Machine | Payload Race |
 | Map | `mvm_powerplant_rc5` | `plr_highertower` (workshop `899335714`) |
-| Players | up to 10 defenders, 1 needed to start | 32 slots, 10 bots fill |
+| Players | up to 10 defenders, 1 needed to start | 32 slots |
 | Extras | mobile upgrades anywhere, infinite ammo, ready-up, chaos every ~30s | bhop, 20 minute maps, chaos every ~30s |
 | Connect | from the live panel | from the live panel |
 
@@ -30,7 +30,7 @@ Only one runs at a time — both share the same install and port `27015`. The pa
 
 ## Live panel
 
-- **LIVE** — green badge, players (`7 + 3 bots / 32`), map, "running since", join button.
+- **LIVE** — green badge, players (`7 / 32`), map, "running since", join button.
 - **STALE** — amber badge; the updater stopped reporting more than 180 seconds ago. The last known address is still shown, plus a warning.
 - **OFFLINE** — red badge, no join button, last seen address, Discord link.
 

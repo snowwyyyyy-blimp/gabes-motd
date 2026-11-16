@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "generated_at": 1763412345,
+  "motd_version": "1.0.0",
+  "online": true,
+  "mode": "plr",
+  "mode_pretty": "PLR Highertower Random Effects",
+  "version": "plr highertower random events",
+  "map": "workshop/899335714",
+  "map_pretty": "PLR Highertower",
+  "players": 7,
+  "bots": 3,
+  "maxplayers": 32,
+  "ip": "169.254.97.94",
+  "port": 2856,
+  "connect": "steam://connect/169.254.97.94:2856?appid=440",
+  "running_since": 1763410000,
+  "last_seen": 1763412340
+}

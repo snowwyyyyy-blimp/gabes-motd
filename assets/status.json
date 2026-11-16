@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generated_at": 1794869626,
+  "generated_at": 1794869738,
   "motd_version": "1.0.0",
   "online": true,
   "mode": "mvm",
@@ -15,5 +15,5 @@
   "port": 2856,
   "connect": "steam://connect/169.254.97.94:2856?appid=440",
   "running_since": 0,
-  "last_seen": 1794869626
+  "last_seen": 1794869738
 }

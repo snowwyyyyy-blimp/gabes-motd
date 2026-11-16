@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "generated_at": 1763412345,
+  "motd_version": "1.0.0",
+  "online": false,
+  "mode": "",
+  "mode_pretty": "",
+  "version": "",
+  "map": "",
+  "map_pretty": "",
+  "players": 0,
+  "bots": 0,
+  "maxplayers": 0,
+  "ip": "169.254.97.94",
+  "port": 2856,
+  "connect": "",
+  "running_since": 0,
+  "last_seen": 1763412000
+}

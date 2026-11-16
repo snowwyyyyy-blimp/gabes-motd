@@ -73,7 +73,7 @@ docs/                       setup, status format, troubleshooting
 
 4. **Deploy:** push to GitHub, then Cloudflare Pages → Connect to Git → framework **None**, empty build command, output `/`. See [docs/SETUP-CLOUDFLARE.md](docs/SETUP-CLOUDFLARE.md).
 
-5. **Point TF2 at it:** `motd_url "https://<site>.pages.dev/"` in `server.cfg`.
+5. **Point TF2 at it:** put the site URL in `C:\TF2server\tf\motd.txt` (and a plain-text copy in `motd_text.txt`). TF2 has no `motd_url` convar — see [docs/SETUP-SERVER.md](docs/SETUP-SERVER.md).
 
 Full details: [gist](docs/SETUP-GIST.md) · [Cloudflare Pages](docs/SETUP-CLOUDFLARE.md) · [server side](docs/SETUP-SERVER.md) · [status format](docs/STATUS-FORMAT.md) · [troubleshooting](docs/TROUBLESHOOTING.md).
 

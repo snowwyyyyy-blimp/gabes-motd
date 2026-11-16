@@ -32,16 +32,17 @@ You get a URL like `https://gabes-motd.pages.dev`. Every push to `main` redeploy
 
 ## 3. Point the server at it
 
-In `C:\TF2server\tf\cfg\server.cfg`:
+TF2 reads the MOTD from a local file, not a convar. Put the URL in `C:\TF2server\tf\motd.txt`:
 
 ```
-motd_enabled 1
-motd_url "https://gabes-motd.pages.dev/"
+https://gabes-motd.gabrielzsdsd.workers.dev/
 ```
 
-The MvM map config (`tf/cfg/mvm_powerplant_rc5.cfg`) can override it if you ever want a different page per mode. Reload with `exec server.cfg` from RCON or restart.
+and a plain-text version in `C:\TF2server\tf\motd_text.txt` for players who disabled HTML MOTDs.
 
-> TF2 clients can disable HTML MOTDs with `cl_disablehtmlmotd 1`. Nothing server-side can force it back on; the Discord link and the server browser still work for those players.
+Both files are capped at 2048 bytes, and TF2 reads them on connect, so no restart is required.
+
+> TF2 clients can disable HTML MOTDs. Nothing server-side can force it back on; the Discord link and the server browser still work for those players.
 
 ## 4. Cache behaviour
 

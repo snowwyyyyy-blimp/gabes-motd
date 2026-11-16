@@ -36,18 +36,26 @@ What matters:
 
 Backups of the original batch files are next to them as `.bat.bak`.
 
-## 2. MOTD convars
+## 2. The MOTD files
 
-In `C:\TF2server\tf\cfg\server.cfg`:
+TF2 has no `motd_url` convar. It reads two files from `C:\TF2server\tf\`:
+
+| File | Used for | Convar |
+|---|---|---|
+| `motd.txt` | HTML / URL MOTD | `motdfile "motd.txt"` |
+| `motd_text.txt` | plain-text fallback for clients with HTML MOTDs disabled | `motdfile_text "motd_text.txt"` |
+
+Put the site URL (or raw HTML) in `motd.txt`:
 
 ```
-motd_enabled 1
-motd_url "https://<your-pages-site>.pages.dev/"
+https://gabes-motd.gabrielzsdsd.workers.dev/
 ```
 
-Apply with `exec server.cfg` or a restart.
+and a short plain-text version in `motd_text.txt`.
 
-If a map config sets `hostname`, it may also be a good place to keep a per-mode `motd_url`. Current map config for MvM: `tf/cfg/mvm_powerplant_rc5.cfg`.
+Both files are limited to 2048 bytes. The server sends them when a client connects, so a change applies to the next connection — no restart needed.
+
+Check the active values with `cvarlist motdfile` in the server console.
 
 ## 3. Confirm the log line exists
 

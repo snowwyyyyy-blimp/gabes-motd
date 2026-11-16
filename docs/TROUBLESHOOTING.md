@@ -2,7 +2,7 @@
 
 ## The MOTD does not appear in game
 
-- `motd_enabled 1` and `motd_url` must be in the executed config. Run `exec server.cfg` or restart.
+- `motd.txt` and `motd_text.txt` must exist in `C:\TF2server\tf\` and contain the URL, not a `motd_url` convar (TF2 has none).
 - Some players set `cl_disablehtmlmotd 1`. That is client-side; nothing on the server overrides it.
 - Test the URL in a normal browser first. If it loads there, it loads in TF2.
 - TF2's in-game browser is old: no external fonts, no heavy libraries. This site sticks to plain HTML/CSS/JS on purpose.

@@ -330,27 +330,7 @@ code {
   color: #cdd5df;
 }
 
-/* ---------- effects ---------- */
-
-.pills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.pills li {
-  font-size: 12px;
-  padding: 4px 9px;
-  border-radius: 999px;
-  border: 1px solid var(--line);
-  background: var(--panel);
-  color: #d5dce5;
-}
-
-/* ---------- connect / commands ---------- */
+/* ---------- connect ---------- */
 
 .steps {
   margin: 0 0 10px;
@@ -372,25 +352,6 @@ code {
   overflow-x: auto;
   white-space: pre;
 }
-
-.commands {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-  gap: 6px;
-}
-
-.commands > div {
-  display: flex;
-  align-items: baseline;
-  gap: 8px;
-  background: var(--panel);
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  padding: 7px 10px;
-  font-size: 12.5px;
-}
-
-.commands span { color: var(--muted); }
 
 .rules.ticks li { margin-bottom: 7px; }
 

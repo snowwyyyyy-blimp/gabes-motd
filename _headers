@@ -1,0 +1,18 @@
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: no-referrer
+
+/index.html
+  Cache-Control: no-store
+
+/assets/status.json
+  Cache-Control: no-store
+
+/assets/status-url.js
+  Cache-Control: no-store
+
+/assets/motd.css
+  Cache-Control: public, max-age=300
+
+/assets/motd.js
+  Cache-Control: public, max-age=300

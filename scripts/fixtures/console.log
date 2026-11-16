@@ -1,0 +1,7 @@
+Using OpenSSL 3.0.8 7 Feb 2023 (Library: OpenSSL 3.0.8 7 Feb 2023)
+maxplayers set to 32
+Unknown command "tvport"
+SteamNetworkingSockets: FakeIP allocation succeeded: 169.254.97.94:2856
+Network: IP 0.0.0.0, mode MP, dedicated Yes, ports 27015 SV / 27020 CL
+Spawn Server: plr_highertower
+FakeIP allocation succeeded: 169.254.97.94:2856

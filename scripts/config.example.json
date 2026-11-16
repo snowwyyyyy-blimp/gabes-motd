@@ -1,0 +1,33 @@
+{
+  "gist_id": "",
+  "gist_filename": "status.json",
+  "token_env": "GITHUB_GIST_TOKEN",
+  "allow_gh_cli": true,
+  "query_host": "127.0.0.1",
+  "query_port": 27015,
+  "query_timeout": 2.0,
+  "query_retries": 2,
+  "server_dir": "C:/TF2server",
+  "console_log": "C:/TF2server/tf/console.log",
+  "console_log_fallback": "C:/TF2server/console.log",
+  "mode_file": "C:/TF2server/tf/motd_mode.txt",
+  "workshop_maps": ["workshop/899335714"],
+  "map_pretty": {
+    "mvm_powerplant_rc5": "Powerplant",
+    "plr_highertower": "PLR Highertower",
+    "workshop/899335714": "PLR Highertower"
+  },
+  "bot_name_prefixes": ["BOT"],
+  "modes": {
+    "mvm": {
+      "label": "mvm random events",
+      "pretty": "MvM Random Effects",
+      "maxplayers": 10
+    },
+    "plr": {
+      "label": "plr highertower random events",
+      "pretty": "PLR Highertower Random Effects",
+      "maxplayers": 32
+    }
+  }
+}

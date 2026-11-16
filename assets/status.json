@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "generated_at": 1794869626,
+  "motd_version": "1.0.0",
+  "online": true,
+  "mode": "mvm",
+  "mode_pretty": "MvM Random Effects",
+  "version": "mvm random events",
+  "map": "mvm_powerplant_rc5",
+  "map_pretty": "Powerplant",
+  "players": 0,
+  "bots": 0,
+  "maxplayers": 10,
+  "ip": "169.254.97.94",
+  "port": 2856,
+  "connect": "steam://connect/169.254.97.94:2856?appid=440",
+  "running_since": 0,
+  "last_seen": 1794869626
+}

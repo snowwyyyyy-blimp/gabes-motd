@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>gabes little server! — TF2 random effects</title>
+<meta name="description" content="gabes little server! Two Team Fortress 2 servers with random chaos effects: MvM Random Effects and PLR Highertower Random Effects.">
+<meta name="theme-color" content="#14171c">
+<link rel="stylesheet" href="assets/motd.css">
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="hero-text">
+      <p class="kicker">Team Fortress 2 · community servers</p>
+      <h1>gabes little server!</h1>
+      <p class="tagline">Two servers. One is robots with a slot machine bolted on. The other is a tower full of carts and bad ideas. Both have random effects firing every 30 seconds.</p>
+    </div>
+    <a class="btn btn-discord" href="https://discord.gg/BRA5UDjqAE" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.3 4.4A19.8 19.8 0 0 0 15.4 3l-.4.8a14.6 14.6 0 0 1 4.3 1.4 15.9 15.9 0 0 0-13.5 0A14.6 14.6 0 0 1 10 3.8L9.6 3a19.8 19.8 0 0 0-4.9 1.4C1.6 8.9.8 13.2 1.2 17.5a19.9 19.9 0 0 0 6 3l.8-1.3c-1-.4-2-.9-2.9-1.5l.7-.5a14.2 14.2 0 0 0 12.4 0l.7.5c-.9.6-1.9 1.1-2.9 1.5l.8 1.3a19.9 19.9 0 0 0 6-3c.5-5-.8-9.3-3.5-13.1ZM8.6 14.9c-1.2 0-2.1-1.1-2.1-2.4s.9-2.4 2.1-2.4 2.1 1.1 2.1 2.4-.9 2.4-2.1 2.4Zm6.8 0c-1.2 0-2.1-1.1-2.1-2.4s.9-2.4 2.1-2.4 2.1 1.1 2.1 2.4-.9 2.4-2.1 2.4Z"/></svg>
+      Join the Discord
+    </a>
+  </header>
+
+  <section class="live" id="live" aria-live="polite">
+    <div class="live-head">
+      <span class="badge badge-checking" id="status-badge">CHECKING</span>
+      <span class="live-title" id="status-mode">Looking for the server…</span>
+    </div>
+    <dl class="live-grid">
+      <div><dt>Map</dt><dd id="status-map">—</dd></div>
+      <div><dt>Players</dt><dd id="status-players">—</dd></div>
+      <div><dt>Running since</dt><dd id="status-since">—</dd></div>
+      <div><dt>Updated</dt><dd id="status-updated">—</dd></div>
+    </dl>
+    <div class="live-actions">
+      <a class="btn btn-primary" id="connect-btn" href="#" hidden>Join server</a>
+      <a class="btn btn-ghost" href="https://discord.gg/BRA5UDjqAE" target="_blank" rel="noopener">Discord</a>
+    </div>
+    <p class="live-note" id="status-note">Fetching the live status…</p>
+  </section>
+
+  <section class="block">
+    <h2>Pick your chaos</h2>
+    <p class="block-lead">Only one runs at a time — both live on the same machine. Start in whichever order you like, the status above always shows the one that is actually up.</p>
+
+    <div class="modes">
+      <article class="mode-card" data-mode="mvm">
+        <div class="mode-top">
+          <span class="mode-tag">Mann vs Machine</span>
+          <span class="mode-live" hidden>Running now</span>
+        </div>
+        <h3>MvM Random Effects</h3>
+        <p class="mode-lead">Powerplant with the chaos plugin armed. Blow up robots while the map quietly decides that everyone is now a skeleton.</p>
+        <ul class="facts">
+          <li><span>Map</span><b>mvm_powerplant_rc5 (Powerplant)</b></li>
+          <li><span>Team</span><b>Up to 10 defenders · 1 player needed to start</b></li>
+          <li><span>Format</span><b>Endless waves · ready-up between them</b></li>
+        </ul>
+        <ul class="ticks">
+          <li>A random effect fires every ~30 seconds, for everyone</li>
+          <li>Mobile upgrades: open the upgrade station anywhere — call for a Medic, press your upgrade key, or type <code>sm_upgrade</code>, even mid-wave</li>
+          <li>Infinite ammo, so you can actually afford to miss</li>
+          <li>Ready-up so a wave never starts while you are shopping</li>
+          <li>Cash and upgrade admin commands for when the run needs a nudge</li>
+        </ul>
+        <p class="mode-tip"><b>New to MvM?</b> Soldier, Heavy or Engineer are the forgiving picks. Buy resistances before damage, stick with the team, and do not chase the giant alone.</p>
+      </article>
+
+      <article class="mode-card" data-mode="plr">
+        <div class="mode-top">
+          <span class="mode-tag">Payload Race</span>
+          <span class="mode-live" hidden>Running now</span>
+        </div>
+        <h3>PLR Highertower Random Effects</h3>
+        <p class="mode-lead">Two carts, one ridiculous tower, thirty-two people, and random effects that absolutely do not respect your strategy.</p>
+        <ul class="facts">
+          <li><span>Map</span><b>plr_highertower (workshop 899335714)</b></li>
+          <li><span>Slots</span><b>32 players · 10 bots fill the server</b></li>
+          <li><span>Timer</span><b>20 minute maps</b></li>
+        </ul>
+        <ul class="ticks">
+          <li>Random effect every ~30 seconds, on top of normal payload race</li>
+          <li>Bunny hopping is enabled — build that speed</li>
+          <li>Push your cart up, stop theirs, and try not to fall off the tower</li>
+          <li>Bots fill empty slots so the map is never a ghost town</li>
+        </ul>
+        <p class="mode-tip"><b>New here?</b> Demo, Soldier and Scout do well on the tower. Keep one eye on the cart and one on whatever the server just did to gravity.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="block">
+    <h2>What are random effects?</h2>
+    <p class="block-lead">Every ~30 seconds the chaos plugin rolls one effect and applies it to everybody for a while. Some are movement, some are combat, some are purely to ruin your aim. A few of the classics:</p>
+    <ul class="pills">
+      <li>Slow Motion</li>
+      <li>Crits</li>
+      <li>Ubercharge</li>
+      <li>Invert Gravity</li>
+      <li>Friendly Fire</li>
+      <li>Bumper Cars</li>
+      <li>Super Speed</li>
+      <li>High HP</li>
+      <li>Low HP</li>
+      <li>No Torso</li>
+      <li>Big Hands</li>
+      <li>Third Person</li>
+      <li>Skeleton Models</li>
+      <li>Show Scoreboard</li>
+      <li>Truce</li>
+      <li>Grappling Hooks</li>
+      <li>Extra Jumps</li>
+      <li>Knockback On Hit</li>
+      <li>Random Crits</li>
+      <li>Pyrovision</li>
+      <li>Screen Fade</li>
+      <li>Lag</li>
+    </ul>
+    <p class="block-lead small">Some effects are disabled on purpose: the ones that just broke the game (fake crashes, screen-melting shaders, rockets-everywhere) are turned off so a round can actually finish.</p>
+  </section>
+
+  <section class="block">
+    <h2>How to connect</h2>
+    <ol class="steps">
+      <li>Use the <b>Join server</b> button above — it is filled in from the live status.</li>
+      <li>Or open the TF2 console with <code>~</code> and paste:</li>
+    </ol>
+    <pre class="code" id="connect-code">connect &lt;ip&gt;:&lt;port&gt;</pre>
+    <p class="block-lead small">The address changes every time the server restarts, so the page rebuilds it from the running server. If the page is stale, ask in Discord for the current IP. You can also search <b>gabes little server</b> in the server browser.</p>
+  </section>
+
+  <section class="block">
+    <h2>Server commands</h2>
+    <div class="commands">
+      <div><code>!admin</code><span>Call an admin / report a problem</span></div>
+      <div><code>!votemap</code><span>Start a map vote</span></div>
+      <div><code>!timeleft</code><span>Time left on the map</span></div>
+      <div><code>!nextmap</code><span>What is coming next</span></div>
+      <div><code>!upgrade</code><span>Open the MvM upgrade station (MvM)</span></div>
+      <div><code>!discord</code><span>Get the Discord link in chat</span></div>
+    </div>
+  </section>
+
+  <section class="block">
+    <h2>House rules</h2>
+    <ul class="ticks rules">
+      <li>Do not cheat, exploit, or crash the server. Random effects are chaos, not an excuse.</li>
+      <li>No chat or mic spam, no slurs, no harassing people.</li>
+      <li>Respect admins — their call is final, argue in Discord afterwards.</li>
+      <li>MvM: do not grief the team. Buying nothing and idling in spawn is griefing.</li>
+      <li>PLR: play the objective at least sometimes. Spawn camping the enemy cart all round is boring for everyone.</li>
+      <li>Bug reports and plugin ideas go in Discord, not in chat mid-round.</li>
+    </ul>
+  </section>
+
+  <section class="block">
+    <h2>FAQ</h2>
+    <details>
+      <summary>Why is my screen upside down / grey / on fire?</summary>
+      <p>Random effect. It goes away on its own. It is not a bug, and no, you cannot opt out for one round.</p>
+    </details>
+    <details>
+      <summary>The server is not showing as online. What now?</summary>
+      <p>Only one mode runs at a time. If nothing is online the machine is probably down or restarting — the Discord is where it gets announced. The status bar on this page refreshes every 30 seconds.</p>
+    </details>
+    <details>
+      <summary>The IP on this page is wrong.</summary>
+      <p>The address is generated fresh on each server start and pushed here automatically. Give it half a minute after a restart; if it is still wrong, ping Discord.</p>
+    </details>
+    <details>
+      <summary>Can I get admin?</summary>
+      <p>Admins are picked, not requested. Be around, be useful, do not ask every day.</p>
+    </details>
+    <details>
+      <summary>Can I suggest an effect or a map?</summary>
+      <p>Yes — post it in Discord. The chaos plugin has a huge effect list, and both servers have limited map pools.</p>
+    </details>
+    <details>
+      <summary>Why are there bots?</summary>
+      <p>Bots fill empty slots so the server is not dead while people join. Real players take their place as they connect.</p>
+    </details>
+  </section>
+
+  <section class="discord-cta">
+    <div>
+      <h2>Everything happens in Discord</h2>
+      <p>Server IPs, restarts, map votes, plugin updates, and the people you just played with. It is the only place updates get announced.</p>
+    </div>
+    <a class="btn btn-discord" href="https://discord.gg/BRA5UDjqAE" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.3 4.4A19.8 19.8 0 0 0 15.4 3l-.4.8a14.6 14.6 0 0 1 4.3 1.4 15.9 15.9 0 0 0-13.5 0A14.6 14.6 0 0 1 10 3.8L9.6 3a19.8 19.8 0 0 0-4.9 1.4C1.6 8.9.8 13.2 1.2 17.5a19.9 19.9 0 0 0 6 3l.8-1.3c-1-.4-2-.9-2.9-1.5l.7-.5a14.2 14.2 0 0 0 12.4 0l.7.5c-.9.6-1.9 1.1-2.9 1.5l.8 1.3a19.9 19.9 0 0 0 6-3c.5-5-.8-9.3-3.5-13.1ZM8.6 14.9c-1.2 0-2.1-1.1-2.1-2.4s.9-2.4 2.1-2.4 2.1 1.1 2.1 2.4-.9 2.4-2.1 2.4Zm6.8 0c-1.2 0-2.1-1.1-2.1-2.4s.9-2.4 2.1-2.4 2.1 1.1 2.1 2.4-.9 2.4-2.1 2.4Z"/></svg>
+      discord.gg/BRA5UDjqAE
+    </a>
+  </section>
+
+  <footer class="foot">
+    <span>gabes little server!</span>
+    <span class="dot">·</span>
+    <span id="foot-status">status: loading…</span>
+    <span class="dot">·</span>
+    <span>motd v<span id="foot-version">1.0.0</span></span>
+    <span class="dot">·</span>
+    <span>made by gabe</span>
+  </footer>
+
+</div>
+<script src="assets/status-url.js"></script>
+<script src="assets/motd.js"></script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+scripts/config.json
+scripts/state.json
+scripts/updater.log
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db

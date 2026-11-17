@@ -32,9 +32,9 @@ One JSON object, published to `status.json` in the gist and written to `assets/s
 | `generated_at` | Unix seconds when the updater built the payload. Drives the staleness check. |
 | `motd_version` | Version of the site/script pair. Shown in the footer. |
 | `online` | `true` only if A2S_INFO answered. |
-| `mode` | `mvm` or `plr`, detected from the mode file, then the map name. |
+| `mode` | `mvm`, `plr` or `vsh`, detected from the mode file, then the map name. |
 | `mode_pretty` | Display name from `modes.<mode>.pretty` in `config.json`. |
-| `version` | Raw mode label written by the launch `.bat` (`mvm random events`, `plr highertower random events`). |
+| `version` | Raw mode label written by the launch `.bat` (`mvm random events`, `plr highertower random events`, `vsh harvest random events`). |
 | `map` | Raw map name from the server (`workshop/899335714`). |
 | `map_pretty` | Friendly map name from `map_pretty` in config. |
 | `players` | Human players (A2S_PLAYER entries whose name does not start with a bot prefix). |
@@ -60,7 +60,7 @@ One JSON object, published to `status.json` in the gist and written to `assets/s
 | Flag | Effect |
 |---|---|
 | `--once` | One collection pass (default). |
-| `--loop` | Keep collecting every `--interval` seconds (default 30). |
+| `--loop` | Keep collecting every `--interval` seconds (default 60). |
 | `--dry-run` | Print the payload, do not publish. |
 | `--mock` | Demo values, no network, no disk writes unless `--write` is also given. |
 | `--write` | Also write `assets/status.json`. |

@@ -22,12 +22,12 @@
 ## Status says OFFLINE while the server is up
 
 - A2S is being answered on a different port. Set `query_port` in `scripts/config.json` to the real `-port`.
-- The server only just started and the updater ran before it was listening. It retries every 30 seconds.
+- The server only just started and the updater ran before it was listening. It retries every 60 seconds.
 - `sv_lan 1` can change query behaviour; this server uses `sv_lan 0`.
 
 ## The connect button has the wrong IP
 
-- The fake IP rotates per restart. Give the updater one cycle (30 s) after a restart.
+- The fake IP rotates per restart. Give the updater one cycle (60 s) after a restart.
 - If `tf/console.log` has no `FakeIP allocation succeeded:` line, `-condebug` or `-enablefakeip` is missing from the launch command.
 - In a pinch, edit `scripts/state.json` (`last_ip`, `last_port`) and the next run will use it until the log line appears.
 
@@ -40,6 +40,7 @@
 
 - `401` — token invalid or expired. Re-run `gh auth login`, or refresh `GITHUB_GIST_TOKEN`.
 - `403` — rate limited or token missing the `gist` scope. The script logs the response body.
+- `403` with `X-RateLimit-Resource: gist_update` and `X-RateLimit-Limit: 100` — GitHub's hourly cap on gist edits for the account. The loop waits for `X-RateLimit-Reset` and carries on; keep `--interval` at 60 or more.
 - `404` on PATCH — wrong `gist_id`, or the gist belongs to another account.
 - The updater never writes the token to disk or into the repo. `scripts/config.json`, `scripts/state.json` and `scripts/updater.log` are gitignored.
 

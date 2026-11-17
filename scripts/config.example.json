@@ -12,10 +12,12 @@
   "console_log_fallback": "C:/TF2server/console.log",
   "mode_file": "C:/TF2server/tf/motd_mode.txt",
   "workshop_maps": ["workshop/899335714"],
+  "vsh_workshop_maps": ["workshop/3205645983"],
   "map_pretty": {
     "mvm_powerplant_rc5": "Powerplant",
     "plr_highertower": "PLR Highertower",
-    "workshop/899335714": "PLR Highertower"
+    "workshop/899335714": "PLR Highertower",
+    "workshop/3205645983": "VSH Harvest"
   },
   "bot_name_prefixes": ["BOT"],
   "modes": {
@@ -27,6 +29,11 @@
     "plr": {
       "label": "plr highertower random events",
       "pretty": "PLR Highertower Random Effects",
+      "maxplayers": 32
+    },
+    "vsh": {
+      "label": "vsh harvest random events",
+      "pretty": "VSH Harvest Random Effects",
       "maxplayers": 32
     }
   }

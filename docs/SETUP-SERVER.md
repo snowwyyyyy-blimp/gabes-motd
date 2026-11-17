@@ -20,12 +20,18 @@ if not exist "logs" mkdir logs
 start "" "C:\TF2server\srcds.exe" -game tf -console -usercon +ip 0.0.0.0 -port 27015 -tvport 27020 -enablefakeip +maxplayers 32 +map workshop/899335714 +exec server.cfg +sv_setsteamaccount <GSLT> +exec unload_dodgeball.cfg -condebug
 ```
 
-`C:\TF2server\start_tf2_randomvm.bat` is identical except for:
+`C:\TF2server\start_tf2_randomvm.bat` and `C:\TF2server\start_tf2_vsh.bat` are identical except for:
 
 ```bat
+:: randomvm
 (echo mvm random events)> "C:\TF2server\tf\motd_mode.txt"
 ...
 +map mvm_powerplant_rc5 ...
+
+:: vsh
+(echo vsh harvest random events)> "C:\TF2server\tf\motd_mode.txt"
+...
++map workshop/3205645983 ...
 ```
 
 What matters:
@@ -73,7 +79,7 @@ The updater also tries `C:\TF2server\console.log` as a fallback path.
 
 ## 4. Confirm the query port
 
-The updater asks `127.0.0.1:27015` for A2S_INFO / A2S_PLAYER. That is the real listening port, not the fake IP. If you change `-port`, change `query_port` in `scripts/config.json` too.
+The updater asks the game server's A2S port for A2S_INFO / A2S_PLAYER (default `27015`, `query_host: auto`). That is the real listening port, not the fake IP. If you change `-port`, change `query_port` in `scripts/config.json` too.
 
 Bots are counted by name prefix (`BOT` by default) from A2S_PLAYER. Adjust `bot_name_prefixes` if your bots are renamed.
 
@@ -84,6 +90,7 @@ The "version" shown on the site is the literal content of `tf/motd_mode.txt`. Ke
 ```
 plr highertower random events
 mvm random events
+vsh harvest random events
 ```
 
 Change the strings in the batch files (and the two `label` values in `scripts/config.json`) if you rename a mode.

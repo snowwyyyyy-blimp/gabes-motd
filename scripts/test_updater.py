@@ -82,18 +82,37 @@ class ModeFileTests(unittest.TestCase):
 
 
 class DetectModeTests(unittest.TestCase):
-    cfg = {"workshop_maps": ["workshop/899335714"]}
+    cfg = {"workshop_maps": ["workshop/899335714"], "vsh_workshop_maps": ["workshop/3205645983"]}
 
     def test_from_label(self):
         self.assertEqual(up.detect_mode("mvm random events", "", self.cfg), "mvm")
         self.assertEqual(up.detect_mode("plr highertower random events", "", self.cfg), "plr")
+        self.assertEqual(up.detect_mode("vsh harvest random events", "", self.cfg), "vsh")
 
     def test_from_map(self):
         self.assertEqual(up.detect_mode("", "mvm_powerplant_rc5", self.cfg), "mvm")
         self.assertEqual(up.detect_mode("", "workshop/899335714", self.cfg), "plr")
+        self.assertEqual(up.detect_mode("", "workshop/3205645983", self.cfg), "vsh")
+        self.assertEqual(up.detect_mode("", "vsh_harvest_final", self.cfg), "vsh")
 
     def test_unknown(self):
         self.assertEqual(up.detect_mode("", "ctf_2fort", self.cfg), "")
+
+
+class PrettyMapTests(unittest.TestCase):
+    cfg = {"map_pretty": {"workshop/3205645983": "VSH Harvest", "workshop/899335714": "PLR Highertower"}}
+
+    def test_workshop_id(self):
+        self.assertEqual(up.pretty_map(self.cfg, "workshop/3205645983"), "VSH Harvest")
+        self.assertEqual(up.pretty_map(self.cfg, "WORKSHOP/899335714"), "PLR Highertower")
+
+    def test_vsh_map_name_variants(self):
+        self.assertEqual(up.pretty_map(self.cfg, "vsh_harvest_final"), "VSH Harvest")
+        self.assertEqual(up.pretty_map(self.cfg, "vsh_harvest_rc2"), "VSH Harvest")
+
+    def test_unknown_map_passes_through(self):
+        self.assertEqual(up.pretty_map(self.cfg, "ctf_2fort"), "ctf_2fort")
+        self.assertEqual(up.pretty_map(self.cfg, ""), "")
 
 
 class BotTests(unittest.TestCase):
@@ -136,9 +155,15 @@ class StatusTests(unittest.TestCase):
                 "pretty": "PLR Highertower Random Effects",
                 "maxplayers": 32,
             },
+            "vsh": {
+                "label": "vsh harvest random events",
+                "pretty": "VSH Harvest Random Effects",
+                "maxplayers": 32,
+            },
         },
-        "map_pretty": {"plr_highertower": "PLR Highertower"},
+        "map_pretty": {"plr_highertower": "PLR Highertower", "workshop/3205645983": "VSH Harvest"},
         "workshop_maps": ["workshop/899335714"],
+        "vsh_workshop_maps": ["workshop/3205645983"],
         "bot_name_prefixes": ["BOT"],
     }
 
@@ -166,6 +191,29 @@ class StatusTests(unittest.TestCase):
         self.assertEqual(status["connect"], "steam://connect/169.254.97.94:2856?appid=440")
         self.assertEqual(status["generated_at"], 1700000100)
         self.assertEqual(status["running_since"], 1700000000)
+
+    def test_vsh_status(self):
+        info = up.parse_info(
+            a2s_info_packet(map_name="workshop/3205645983", players=12, maxplayers=32, bots=0)
+        )
+        info["player_list"] = [
+            {"name": f"player{i}", "score": 0, "duration": 1.0} for i in range(12)
+        ]
+        status = up.build_status(
+            self.base_cfg,
+            "vsh harvest random events",
+            1700000000,
+            ("169.254.1.2", 5000),
+            info,
+            {},
+            now=1700000100,
+        )
+        self.assertEqual(status["mode"], "vsh")
+        self.assertEqual(status["mode_pretty"], "VSH Harvest Random Effects")
+        self.assertEqual(status["map"], "workshop/3205645983")
+        self.assertEqual(status["map_pretty"], "VSH Harvest")
+        self.assertEqual(status["players"], 12)
+        self.assertEqual(status["maxplayers"], 32)
 
     def test_offline_uses_cached_address(self):
         state = {

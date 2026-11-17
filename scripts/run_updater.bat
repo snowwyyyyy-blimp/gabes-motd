@@ -6,7 +6,7 @@ cd /d "%~dp0.."
 
 where pythonw >nul 2>&1
 if errorlevel 1 (
-    python "%~dp0update_gist.py" --loop --interval 30 --write
+    python "%~dp0update_gist.py" --loop --interval 60 --write
 ) else (
-    pythonw "%~dp0update_gist.py" --loop --interval 30 --write
+    pythonw "%~dp0update_gist.py" --loop --interval 60 --write
 )

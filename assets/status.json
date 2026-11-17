@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generated_at": 1794871311,
+  "generated_at": 1794881256,
   "motd_version": "1.0.0",
   "online": true,
   "mode": "mvm",
@@ -8,12 +8,12 @@
   "version": "mvm random events",
   "map": "mvm_powerplant_rc5",
   "map_pretty": "Powerplant",
-  "players": 1,
+  "players": 0,
   "bots": 0,
   "maxplayers": 10,
   "ip": "169.254.5.234",
   "port": 62984,
   "connect": "steam://connect/169.254.5.234:62984?appid=440",
-  "running_since": 1794870944,
-  "last_seen": 1794871311
+  "running_since": 1794873854,
+  "last_seen": 1794881256
 }

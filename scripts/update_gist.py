@@ -12,7 +12,7 @@ Typical usage
 -------------
     python scripts/update_gist.py --create     # first time: create the gist
     python scripts/update_gist.py --once       # update it once
-    python scripts/update_gist.py --loop --interval 30
+    python scripts/update_gist.py --loop --interval 60
     python scripts/update_gist.py --dry-run    # print JSON, don't publish
     python scripts/update_gist.py --mock       # offline demo data
 
@@ -67,10 +67,12 @@ DEFAULT_CONFIG: dict = {
     "console_log_fallback": "C:/TF2server/console.log",
     "mode_file": "C:/TF2server/tf/motd_mode.txt",
     "workshop_maps": ["workshop/899335714"],
+    "vsh_workshop_maps": ["workshop/3205645983"],
     "map_pretty": {
         "mvm_powerplant_rc5": "Powerplant",
         "plr_highertower": "PLR Highertower",
         "workshop/899335714": "PLR Highertower",
+        "workshop/3205645983": "VSH Harvest",
     },
     "bot_name_prefixes": ["BOT"],
     "modes": {
@@ -82,6 +84,11 @@ DEFAULT_CONFIG: dict = {
         "plr": {
             "label": "plr highertower random events",
             "pretty": "PLR Highertower Random Effects",
+            "maxplayers": 32,
+        },
+        "vsh": {
+            "label": "vsh harvest random events",
+            "pretty": "VSH Harvest Random Effects",
             "maxplayers": 32,
         },
     },
@@ -382,14 +389,20 @@ def detect_mode(label: str, map_name: str, cfg: dict) -> str:
     text = (label or "").lower()
     if "mvm" in text:
         return "mvm"
+    if "vsh" in text or "saxton" in text:
+        return "vsh"
     if "highertower" in text or "plr" in text:
         return "plr"
 
     m = (map_name or "").lower()
     if m.startswith("mvm") or "mvm" in m:
         return "mvm"
+    if m.startswith("vsh") or "saxton" in m:
+        return "vsh"
     if "highertower" in m or m in [w.lower() for w in cfg.get("workshop_maps", [])]:
         return "plr"
+    if m in [w.lower() for w in cfg.get("vsh_workshop_maps", [])]:
+        return "vsh"
     return ""
 
 
@@ -400,7 +413,11 @@ def pretty_map(cfg: dict, map_name: str) -> str:
     if map_name in table:
         return table[map_name]
     lower = {k.lower(): v for k, v in table.items()}
-    return lower.get(map_name.lower(), map_name)
+    if map_name.lower() in lower:
+        return lower[map_name.lower()]
+    if map_name.lower().startswith("vsh_harvest"):
+        return "VSH Harvest"
+    return map_name
 
 
 def connect_url(ip: str, port: int) -> str:
@@ -700,7 +717,7 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Publish gabes little server! status to a gist")
     parser.add_argument("--once", action="store_true", help="update once, then exit (default)")
     parser.add_argument("--loop", action="store_true", help="keep updating in a loop")
-    parser.add_argument("--interval", type=int, default=30, help="seconds between updates (default 30)")
+    parser.add_argument("--interval", type=int, default=60, help="seconds between updates (default 60)")
     parser.add_argument("--dry-run", action="store_true", help="print JSON without publishing")
     parser.add_argument("--create", action="store_true", help="create the gist and write assets/status-url.js")
     parser.add_argument("--write", action="store_true", help="also write assets/status.json fallback")
@@ -717,13 +734,36 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.loop:
         log(f"loop: every {args.interval}s (Ctrl+C to stop)")
+        interval = max(5, args.interval)
         try:
             while True:
-                run_once(cfg, args)
-                time.sleep(max(5, args.interval))
+                wait = interval
+                try:
+                    run_once(cfg, args)
+                except urllib.error.HTTPError as exc:
+                    detail = ""
+                    try:
+                        detail = exc.read().decode("utf-8", "replace")
+                    except Exception:
+                        pass
+                    detail = " ".join(detail.split())[:300]
+                    log(f"cycle failed: GitHub HTTP {exc.code}: {detail}", error=True)
+                    reset = exc.headers.get("X-RateLimit-Reset") if exc.headers else None
+                    if exc.code in (403, 429) and reset and reset.isdigit():
+                        # gist updates are capped per hour; sleep until the window resets
+                        wait = max(interval, min(900, int(reset) - int(time.time()) + 5))
+                        log(f"rate limited: waiting {wait}s for the reset")
+                except (urllib.error.URLError, OSError) as exc:
+                    log(f"cycle failed: {exc}", error=True)
+                except KeyboardInterrupt:
+                    raise
+                except Exception as exc:  # keep the loop alive on unexpected errors
+                    log(f"cycle failed: {exc!r}", error=True)
+                time.sleep(wait)
         except KeyboardInterrupt:
             log("loop stopped")
             return 0
+        return 0
 
     return run_once(cfg, args)
 

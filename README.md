@@ -2,13 +2,13 @@
 
 The MOTD page for **gabes little server!**, plus the small Python service that keeps it honest.
 
-The page is a static site (Cloudflare Pages ready). It shows the mode that is actually running, live player counts, the map, how long the server has been up, and a one-click `steam://connect` button. It also documents both server modes, the random chaos effects, the rules, and the Discord.
+The page is a static site (Cloudflare Pages ready). It shows the mode that is actually running, live player counts, the map, how long the server has been up, and a one-click `steam://connect` button. It also documents all three server modes, the random chaos effects, the rules, and the Discord.
 
 ```
 launch .bat  ──writes──►  tf/motd_mode.txt      "plr highertower random events"
 srcds -condebug ───────►  tf/console.log        "FakeIP allocation succeeded: 169.254.x.x:PORT"
                                 │
-                    scripts/update_gist.py  (Task Scheduler, every 30s)
+                    scripts/update_gist.py  (Task Scheduler, every 60s)
                                 │  A2S on 127.0.0.1:27015 → players / bots / map
                                 ▼
                           gist status.json
@@ -16,17 +16,17 @@ srcds -condebug ───────►  tf/console.log        "FakeIP allocati
                     MOTD on Cloudflare Pages (fetch, refresh 30s)
 ```
 
-## The two servers
+## The three servers
 
-| | MvM Random Effects | PLR Highertower Random Effects |
-|---|---|---|
-| Mode | Mann vs Machine | Payload Race |
-| Map | `mvm_powerplant_rc5` | `plr_highertower` (workshop `899335714`) |
-| Players | up to 10 defenders, 1 needed to start | 32 slots |
-| Extras | mobile upgrades anywhere, infinite ammo, ready-up, chaos every ~30s | bhop, 20 minute maps, chaos every ~30s |
-| Connect | from the live panel | from the live panel |
+| | MvM Random Effects | PLR Highertower Random Effects | VSH Harvest Random Effects |
+|---|---|---|---|
+| Mode | Mann vs Machine | Payload Race | Versus Saxton Hale |
+| Map | `mvm_powerplant_rc5` | `plr_highertower` (workshop `899335714`) | VSH Harvest (workshop `3205645983`) |
+| Players | up to 10 defenders, 1 needed to start | 32 slots | 32 slots |
+| Extras | mobile upgrades anywhere, infinite ammo, ready-up, chaos every ~30s | bhop, 20 minute maps, chaos every ~30s | one Hale vs everyone else, chaos every ~30s |
+| Connect | from the live panel | from the live panel | from the live panel |
 
-Only one runs at a time — both share the same install and port `27015`. The page always shows whichever one is up.
+Only one runs at a time — all three share the same install and port `27015`. The page always shows whichever one is up.
 
 ## Live panel
 
@@ -85,7 +85,7 @@ Standard library only — no `pip install`. It resolves a token from `GITHUB_GIS
 python scripts\update_gist.py --mock              # demo payload, no network
 python scripts\update_gist.py --dry-run           # real payload, no publish
 python scripts\update_gist.py --once --write      # publish + refresh fallback
-python scripts\update_gist.py --loop --interval 30
+python scripts\update_gist.py --loop --interval 60
 python scripts\update_gist.py --create            # make the gist
 ```
 

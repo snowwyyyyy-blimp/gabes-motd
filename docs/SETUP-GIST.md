@@ -1,6 +1,6 @@
 # Setting up the gist
 
-The MOTD reads a tiny JSON file from a GitHub gist. `scripts/update_gist.py` writes it every 30 seconds with the mode, players, map, and current connect address.
+The MOTD reads a tiny JSON file from a GitHub gist. `scripts/update_gist.py` writes it every 60 seconds with the mode, players, map, and current connect address.
 
 ## 1. Auth
 
@@ -69,7 +69,9 @@ Create a Task Scheduler task:
 | Start in | `C:\path\to\gabes-motd` |
 | Run whether user is logged on or not | optional; `gh auth token` needs your user profile |
 
-The batch file starts `pythonw` with `--loop --interval 30 --write`, so there is no console window and the fallback file stays fresh.
+The batch file starts `pythonw` with `--loop --interval 60 --write`, so there is no console window and the fallback file stays fresh.
+
+GitHub counts gist edits under its own `gist_update` limit of **100 per hour**, so keep the interval at 60 seconds or longer. If the limit is ever hit, the updater logs it and sleeps until the window resets instead of exiting.
 
 Logs go to `scripts/updater.log` (rotated at 1 MB).
 
